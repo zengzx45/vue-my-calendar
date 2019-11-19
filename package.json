@@ -1,15 +1,15 @@
 {
-  "name": "calendar",
-  "version": "1.0.1",
+  "name": "vue-my-calendar",
+  "version": "1.0.0",
   "author": "zengzx",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zengzx45/calendar.git"
+    "url": "https://github.com/zengzx45/vue-my-calendar.git"
   },
   "bugs": {
-    "url": "https://github.com/zengzx45/calendar.git/issues"
+    "url": "https://github.com/zengzx45/vue-my-calendar.git/issues"
   },
-  "homepage": "https://github.com/zengzx45/calendar",
+  "homepage": "https://github.com/zengzx45/vue-my-calendar",
   "license": "MIT",
   "description": "vue 周 月 时间选择器",
   "main": "lib/vue-hash-calendar.umd.min.js",
