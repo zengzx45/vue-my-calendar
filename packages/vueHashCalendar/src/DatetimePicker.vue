@@ -23,10 +23,16 @@
             <calendar ref="calendar" v-if="pickerType !== 'time'" :show="isShowCalendar" :default-date="defaultDatetime"
                       :week-start="weekStart" :scroll-change-date="scrollChangeDate"
                       :is-show-week-view="isShowWeekView" :mark-date="markDate" @height="heightChange"
-                      @change="dateChange" @click="dateClick"></calendar>
+                      @change="dateChange" @click="dateClick" :iconShow.sync = 'iiconShow'></calendar>
             <time-picker v-if="pickerType !== 'date'" :show="!isShowCalendar" :default-time="defaultDatetime"
                          @change="timeChange"></time-picker>
+
+            <div class="slid-icon" ref="calendarTitle">
+                <img src="../img/up.png" v-if ="iiconShow"/>
+                <span v-else></span>
+            </div>
         </div>
+        
     </div>
 </template>
 
@@ -86,6 +92,7 @@
         name: "VueHashCalendar",
         data() {
             return {
+                iiconShow: true,
                 checkedDate: {
                     year: new Date().getFullYear(),
                     month: new Date().getMonth(),
@@ -100,6 +107,8 @@
             }
         },
         mounted() {
+            console.log(this.$refs.calendar.iconShow)
+            this.iiconShow = this.$refs.calendar.iconShow
             if (this.model === 'inline') {
                 this.isShowDatetimePicker = true;
             }
@@ -261,16 +270,38 @@
     }
 
     .calendar_content {
-        position absolute
-        width 100%
-        left 0
-        bottom 0
+        // position absolute
+        // width 100%
+        // left 0
+        // bottom 0
         display flex
         padding-bottom px2vw(26px)
         flex-wrap wrap
         background white
         height px2vw(710px)
         overflow hidden
+        position relative
+    }
+    .slid-icon {
+        position: absolute;
+        left 50%
+        bottom 0
+        transform translateX(-50%)
+        height px2vw(80px) 
+        display flex
+        align-items center
+        img {
+            display block
+            width px2vw(54)
+            height px2vw(22)
+        }
+        span {
+            display block
+            width px2vw(54)
+            height px2vw(6)
+            border-radius px2vw(3)
+            background-color #ddd
+        }
     }
 
     .calendar_title {

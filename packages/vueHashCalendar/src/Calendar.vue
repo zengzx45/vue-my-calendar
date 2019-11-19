@@ -56,7 +56,11 @@
             },
             show: {
                 type: Boolean,
-                default: false
+                default: true
+            },
+            iconShow: {
+                type: Boolean,
+                default: true
             },
             weekStart: {
                 type: String,
@@ -367,8 +371,12 @@
                 if (Math.abs(this.touch.y) > Math.abs(this.touch.x) && Math.abs(this.touch.y * this.$refs.calendar.offsetHeight) > 50) {
                     if (this.touch.y > 0 && this.isShowWeek) {
                         this.showMonth();
+                        // iconShow up
+                        this.$emit('update:iconShow', true)
                     } else if (this.touch.y < 0 && !this.isShowWeek) {
                         this.showWeek();
+                        // iconShow down
+                        this.$emit('update:iconShow', false)
                     }
                 } else {
                     this.touch = {
