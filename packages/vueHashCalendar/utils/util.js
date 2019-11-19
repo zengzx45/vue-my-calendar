@@ -281,7 +281,7 @@ export const getWeekFromDateString = function (dateString) {
         var dateArray = dateString.split("-");
         date = new Date(dateArray[0], parseInt(dateArray[1] - 1), dateArray[2]);
     }
-    return "星期" + "日一二三四五六".charAt(date.getDay());
+    return "周" + "日一二三四五六".charAt(date.getDay());
 }
 
 /**

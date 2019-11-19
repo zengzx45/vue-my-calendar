@@ -19,13 +19,20 @@
                     :style="{transform: `translate3d(${(i-1+translateIndex + (isTouching ? touch.x : 0))*100}%, ${calendarY}px, 0)`,transitionDuration: `${isTouching ? 0 : transitionDuration}s`,}">
                     <div class="calendar_item" ref="calendarItem" v-for="(date, j) in item" :key="i + j"
                          @click="clickCalendarDay(date)">
-                        <p v-if="date.day === 1 && !isNotCurrentMonthDay(date,i)"
+                        <!-- <p v-if="date.day === 1 && !isNotCurrentMonthDay(date,i)"
                            class="calendar_day calendar_first_today" ref="calendarDay"
                            :class="{'calendar_day_checked': isCheckedDay(date)}">{{ date.month + 1 }}<span>月</span></p>
                         <p v-else class="calendar_day" ref="calendarDay"
                            :class="{'calendar_day_today': isToday(date), 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}">
-                            {{ date.day }}</p>
-                        <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div>
+                            {{ date.day }}</p> -->
+
+                        <p class="calendar_day" ref="calendarDay" 
+                            v-if="isToday(date)"
+                           :class="{'calendar_day_today': isToday(date), 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}">今</p>
+                        <p v-else class="calendar_day"
+                        :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}"
+                         ref="calendarDay" >{{ date.day }}</p>
+                        <!-- <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div> -->
                     </div>
                 </li>
             </ul>
@@ -75,7 +82,7 @@
                 monthOfToday: new Date().getMonth(),//今天所在的月份
                 dayOfToday: new Date().getDate(),//今天所在的日期
                 weekArray: ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],//星期数组
-                calendarWeek: ['日', '一', '二', '三', '四', '五', '六'],//日历对应的星期
+                calendarWeek: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],//日历对应的星期
                 calendarOfMonth: [],//月份对应的日历表
                 calendarOfMonthShow: [],//月份对应的日历表
                 calendarDaysTotalLength: 42,//日历表展示的总天数  6行7列
@@ -486,7 +493,7 @@
     .calendar_body {
         position relative
         width 100%
-        margin-top px2vw(100px)
+        // margin-top px2vw(100px)
     }
 
     .calendar_week {
@@ -555,7 +562,7 @@
     }
 
     .calendar_day_today {
-        background bg-color
+        background bg-color-today
     }
 
     .calendar_day_not {

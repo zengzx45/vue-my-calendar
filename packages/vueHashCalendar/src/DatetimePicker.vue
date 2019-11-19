@@ -8,7 +8,7 @@
     <div class="calendar" :class="{'calendar_inline': model === 'inline'}" v-show="isShowDatetimePicker"
          :style="{'height': `${model === 'inline' ? calendarContentHeight : undefined}px`}" @click="close">
         <div class="calendar_content" :style="{'height': `${calendarContentHeight}px`}" @click.stop>
-            <div class="calendar_title" ref="calendarTitle">
+            <!-- <div class="calendar_title" ref="calendarTitle">
                 <div class="calendar_title_date">
                     <span v-if="pickerType !== 'time'" class="calendar_title_date_year"
                           :class="{'calendar_title_date_active': isShowCalendar}"
@@ -19,7 +19,7 @@
                 </div>
                 <div v-if="showTodayButton" class="calendar_confirm" @click="today">今天</div>
                 <div class="calendar_confirm" v-if="model === 'dialog'" @click="confirm">确定</div>
-            </div>
+            </div> -->
             <calendar ref="calendar" v-if="pickerType !== 'time'" :show="isShowCalendar" :default-date="defaultDatetime"
                       :week-start="weekStart" :scroll-change-date="scrollChangeDate"
                       :is-show-week-view="isShowWeekView" :mark-date="markDate" @height="heightChange"
