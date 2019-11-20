@@ -275,7 +275,7 @@
         // left 0
         // bottom 0
         display flex
-        padding-bottom px2vw(26px)
+        // padding-bottom px2vw(26px)
         flex-wrap wrap
         background white
         height px2vw(710px)
