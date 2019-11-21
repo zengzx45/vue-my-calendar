@@ -26,8 +26,11 @@
                            :class="{'calendar_day_today': isToday(date), 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}">
                             {{ date.day }}</p> -->
 
+                        <p v-if="date.day === 1 && !isNotCurrentMonthDay(date,i)"
+                           class="calendar_day calendar_first_today" ref="calendarDay"
+                           :class="{'calendar_day_checked': isCheckedDay(date)}">{{ date.month + 1 }}<span>月</span></p>
                         <p class="calendar_day" ref="calendarDay" 
-                            v-if="isToday(date)"
+                            v-else-if="isToday(date)"
                            :class="{'calendar_day_today': isToday(date), 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}">今</p>
                         <p v-else class="calendar_day"
                         :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}"
