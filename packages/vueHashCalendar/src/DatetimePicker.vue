@@ -92,7 +92,7 @@
         name: "VueHashCalendar",
         data() {
             return {
-                iiconShow: true,
+                iiconShow: false,
                 checkedDate: {
                     year: new Date().getFullYear(),
                     month: new Date().getMonth(),
