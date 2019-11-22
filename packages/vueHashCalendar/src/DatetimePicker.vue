@@ -27,7 +27,7 @@
             <time-picker v-if="pickerType !== 'date'" :show="!isShowCalendar" :default-time="defaultDatetime"
                          @change="timeChange"></time-picker>
 
-            <div class="slid-icon" ref="calendarTitle">
+            <div class="slid-icon" ref="calendarTitle" @click="$emit('isShowWeekViewFun')">
                 <img src="../img/up.png" v-if ="iiconShow"/>
                 <span v-else></span>
             </div>
