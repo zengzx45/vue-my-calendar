@@ -27,7 +27,7 @@
             <time-picker v-if="pickerType !== 'date'" :show="!isShowCalendar" :default-time="defaultDatetime"
                          @change="timeChange"></time-picker>
 
-            <div class="slid-icon" ref="calendarTitle" @click="$emit('isShowWeekViewFun')">
+            <div class="slid-icon" ref="calendarTitle" @click="isShowWeekViewFun">
                 <img src="../img/up.png" v-if ="iiconShow"/>
                 <span v-else></span>
             </div>
@@ -107,7 +107,6 @@
             }
         },
         mounted() {
-            console.log(this.$refs.calendar.iconShow)
             this.iiconShow = this.$refs.calendar.iconShow
             if (this.model === 'inline') {
                 this.isShowDatetimePicker = true;
@@ -180,6 +179,15 @@
             }
         },
         methods: {
+            // 
+            isShowWeekViewFun() {
+                this.iiconShow = !this.iiconShow
+                if(this.iiconShow) {
+                    this.$refs.calendar.showMonth()
+                } else {
+                    this.$refs.calendar.showWeek()
+                }
+            },
             today() {
                 this.$refs.calendar.today();
             },
