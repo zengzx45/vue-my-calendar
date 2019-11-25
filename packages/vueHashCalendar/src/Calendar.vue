@@ -33,7 +33,7 @@
                             v-else-if="isToday(date)"
                            :class="{'calendar_day_today': isToday(date), 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}">今</p>
                         <p v-else class="calendar_day"
-                        :class="{'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}"
+                        :class="{ 'calendar_day_not': isNotCurrentMonthDay(date,i)}"
                          ref="calendarDay" >{{ date.day }}</p>
                         <!-- <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div> -->
                     </div>
