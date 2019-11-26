@@ -35,7 +35,7 @@
                         <p v-else class="calendar_day"
                         :class="{ 'calendar_day_checked': isCheckedDay(date), 'calendar_day_not': isNotCurrentMonthDay(date,i)}"
                          ref="calendarDay" >{{ date.day }}</p>
-                        <!-- <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div> -->
+                        <div :style="{'background': markDateColor(date)}" class="calendar_dot"></div>
                     </div>
                 </li>
             </ul>
@@ -488,7 +488,6 @@
             },
             markDateColor(date) {//当前日期是否需要标记
                 let dateString = `${date.year}/${this.fillNumber(date.month + 1)}/${this.fillNumber(date.day)}`
-
                 return this.markDateColorObj[dateString];
             },
             fillNumber(val) {//小于10，在前面补0
