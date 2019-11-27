@@ -164,9 +164,10 @@
                                 this.markDateColorObj[date] = item.color;
                             })
                         })
+                        this.$forceUpdate()
                     }
                 },
-                //immediate: true
+                immediate: true
             },
             isShowWeekView: {
                 handler(val) {
