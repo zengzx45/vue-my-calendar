@@ -166,7 +166,7 @@
                         })
                     }
                 },
-                immediate: true
+                //immediate: true
             },
             isShowWeekView: {
                 handler(val) {
