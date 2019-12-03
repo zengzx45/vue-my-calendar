@@ -159,11 +159,14 @@
             markDate: {
                 handler(val) {
                     if (val) {
+                        console.log(val)
+                        this.markDateColorObj = [];
                         val.forEach(item => {
                             item.date.forEach(date => {
                                 this.markDateColorObj[date] = item.color;
                             })
                         })
+                        console.log(this.markDateColorObj)
                         this.$forceUpdate()
                     }
                 },
