@@ -8,26 +8,27 @@
     <div class="calendar" :class="{'calendar_inline': model === 'inline'}" v-show="isShowDatetimePicker"
          :style="{'height': `${model === 'inline' ? calendarContentHeight : undefined}px`}" @click="close">
         <div class="calendar_content" :style="{'height': `${calendarContentHeight}px`}" @click.stop>
-            <!-- <div class="calendar_title" ref="calendarTitle">
+            <div class="calendar_title" ref="calendarTitle">
                 <div class="calendar_title_date">
                     <span v-if="pickerType !== 'time'" class="calendar_title_date_year"
                           :class="{'calendar_title_date_active': isShowCalendar}"
                           @click="showCalendar">{{ `${checkedDate.year}年${checkedDate.month + 1}月${checkedDate.day}日`}}</span>
-                    <span v-if="pickerType !== 'date'" class="calendar_title_date_time"
+                    <!-- <span v-if="pickerType !== 'date'" class="calendar_title_date_time"
                           :class="{'calendar_title_date_active': !isShowCalendar}"
-                          @click="showTime">{{ `${fillNumber(checkedDate.hours)}:${fillNumber(checkedDate.minutes)}`}}</span>
+                          @click="showTime">{{ `${fillNumber(checkedDate.hours)}:${fillNumber(checkedDate.minutes)}`}}</span> -->
                 </div>
                 <div v-if="showTodayButton" class="calendar_confirm" @click="today">今天</div>
-                <div class="calendar_confirm" v-if="model === 'dialog'" @click="confirm">确定</div>
-            </div> -->
+                <!-- <div class="calendar_confirm" v-if="model === 'dialog'" @click="confirm">确定</div> -->
+            </div>
             <calendar ref="calendar" v-if="pickerType !== 'time'" :show="isShowCalendar" :default-date="defaultDatetime"
                       :week-start="weekStart" :scroll-change-date="scrollChangeDate"
                       :is-show-week-view="isShowWeekView" :mark-date="markDate" @height="heightChange"
-                      @change="dateChange" @click="dateClick" :iconShow.sync = 'iiconShow'></calendar>
+                      @change="dateChange"  @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd"
+                      @slidechange="slideChange" @click="dateClick" :iconShow.sync = 'iiconShow'></calendar>
             <time-picker v-if="pickerType !== 'date'" :show="!isShowCalendar" :default-time="defaultDatetime"
                          @change="timeChange"></time-picker>
 
-            <div class="slid-icon" ref="calendarTitle" @click="isShowWeekViewFun">
+            <div class="slid-icon" ref="calendarIcon" @click="isShowWeekViewFun">
                 <img src="../img/up.png" v-if ="iiconShow"/>
                 <span v-else></span>
             </div>
@@ -241,7 +242,7 @@
             heightChange(height) {//高度变化
                 if (!this.firstTimes && this.model === 'dialog') return;
 
-                this.calendarContentHeight = height + this.calendarTitleHeight;
+                this.calendarContentHeight = height + this.calendarTitleHeight + this.$refs.calendarIcon.offsetHeight;
                 this.firstTimes = false;
             },
             dateFormat(dateArr) {// 日期格式转换
@@ -250,6 +251,18 @@
                 });
 
                 return dateArr
+            },
+            touchStart(event) {// 监听手指开始滑动事件
+                this.$emit('touchstart', event);
+            },
+            touchMove(event) {// 监听手指开始滑动事件
+                this.$emit('touchmove', event);
+            },
+            touchEnd(event) {// 监听手指开始滑动事件
+                this.$emit('touchend', event);
+            },
+            slideChange(direction) {// 滑动方向改变
+                this.$emit('slidechange', direction);
             }
         }
     }
@@ -315,9 +328,10 @@
     .calendar_title {
         position absolute
         width 100%
+        height px2vw(100)
         left 0
         top 0
-        background bg-color
+        // background bg-color
         borderBottom()
         display flex
         align-items center
@@ -328,7 +342,11 @@
     .calendar_title_date {
         color vice-font-color
         background white
-        paddingAround()
+        flex 1
+        line-height px2vw(100px)
+        text-align center
+        margin-left px2vw(100px)
+        // paddingAround()
     }
 
     .calendar_title_date_active {
@@ -341,7 +359,8 @@
     }
 
     .calendar_confirm {
-        color main-color
-        margin-right px2vw(34px)
+        width px2vw(100)
+        line-height px2vw(100px)
+        color #3B6BF5
     }
 </style>

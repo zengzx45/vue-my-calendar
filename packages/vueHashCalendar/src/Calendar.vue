@@ -356,6 +356,7 @@
                 if (Math.abs(this.touch.x) > Math.abs(this.touch.y) && Math.abs(this.touch.x) > 0.2) {
                     this.currentChangeIsScroll = true;
                     if (this.touch.x > 0) {
+                        this.$emit('slidechange', 'right');
                         this.getLastMonth();
                         if (this.isShowWeek) {
                             setTimeout(() => {
@@ -364,6 +365,7 @@
                             }, this.transitionDuration * 1000)
                         }
                     } else if (this.touch.x < 0) {
+                        this.$emit('slidechange', 'left');
                         this.getNextMonth();
                         if (this.isShowWeek) {
                             setTimeout(() => {
@@ -375,10 +377,12 @@
                 }
                 if (Math.abs(this.touch.y) > Math.abs(this.touch.x) && Math.abs(this.touch.y * this.$refs.calendar.offsetHeight) > 50) {
                     if (this.touch.y > 0 && this.isShowWeek) {
+                        this.$emit('slidechange', 'down');
                         this.showMonth();
                         // iconShow up
                         this.$emit('update:iconShow', true)
                     } else if (this.touch.y < 0 && !this.isShowWeek) {
+                        this.$emit('slidechange', 'up');
                         this.showWeek();
                         // iconShow down
                         this.$emit('update:iconShow', false)
@@ -505,7 +509,7 @@
     .calendar_body {
         position relative
         width 100%
-        // margin-top px2vw(100px)
+        margin-top px2vw(100px)
     }
 
     .calendar_week {
