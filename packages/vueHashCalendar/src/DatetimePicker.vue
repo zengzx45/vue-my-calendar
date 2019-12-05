@@ -191,6 +191,7 @@
             },
             today() {
                 this.$refs.calendar.today();
+                this.$emit('queryToday');
             },
             dateChange(date) {
                 date.hours = this.checkedDate.hours;
